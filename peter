@@ -1,0 +1,19 @@
+with conn.cursor() as cur:
+  alter_role = "ALTER USER \"%s\"" % pending_dict['username']
+  cur.execute(alter_role + " WITH PASSWORD %s", (pending_dict['password'],))
+  conn.commit()
+we need to modify these lines
+
+but before that we need to get current date and add 60 days
+get this string like '2020-06-24' format
+and then
+
+alter_role = = "ALTER USER \"%s\"" % pending_dict['username']
+alter_role=alter_role+ " WITH PASSWORD %s", (pending_dict['password']
+
+
+alter_role=alter_role+ " VALID UNTIL '2020-06-24' "
+cur.execute(alter_role )
+
+the challenge is that date string has to be in 'xxxx-xx-xx' format, it can not be done dynamically
+I believe that is the challenge and why AWS does not implment
