@@ -4,11 +4,12 @@ import logging
 import os
 import pg
 import pgdb
-
+from datetime import date, timedelta
 logger = logging.getLogger()
 logger.setLevel(logging.INFO)
-
-
+today = date.today()
+vdate = (date.today() + timedelta(days=60)).isoformat()
+vdate()
 def lambda_handler(event, context):
     """Secrets Manager RDS PostgreSQL Handler
     This handler uses the single-user rotation scheme to rotate an RDS PostgreSQL user credential. This rotation
@@ -145,6 +146,7 @@ def set_secret(service_client, arn, token):
         with conn.cursor() as cur:
             alter_role = "ALTER USER \"%s\"" % pending_dict['username']
             cur.execute(alter_role + " WITH PASSWORD %s", (pending_dict['password'],))
+            cur.execute(alter_role + " VALID UNTIL %s", (pending_dict['vdate()'],))
             conn.commit()
             logger.info("setSecret: Successfully set password for user %s in PostgreSQL DB for secret arn %s." % (pending_dict['username'], arn))
     finally:

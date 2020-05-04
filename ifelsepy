@@ -2,8 +2,11 @@
 ## if condition to test:
 ##  code to execute if test passes
 
+tuples= ()
+lists = []
+directories = {"apple":5, "cockie":1}
 bank_balance = 50
-item_cost = 50
+item_cost = 60
 item_inventory = 1
 if item_cost < bank_balance and item_inventory >= 1:
     bank_balance -= item_cost
@@ -20,3 +23,9 @@ else:
     else:
         print("Transaction Failed, Insufficent Funds")
         print(bank_balance)
+
+##while and for loop
+
+#while condition:
+       execute code still the condition is true
+       
