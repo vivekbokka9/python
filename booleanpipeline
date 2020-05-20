@@ -1,0 +1,44 @@
+pipeline {
+    agent any
+
+    parameters {
+        booleanParam(name: 'step1', defaultValue: true, description: '')
+        booleanParam(name: 'step2', defaultValue: true, description: '')
+        booleanParam(name: 'step3', defaultValue: true, description: '')
+    }
+    stages {
+        stage("stage1") {
+            steps {
+                script {
+    if (env.step1 == 'true') {
+        echo 'executing step1'
+    } else {
+        echo 'not executing step1'
+    }
+}
+            }
+        }
+        stage("stage2") {
+            steps {
+                script {
+    if (env.step2 == 'true') {
+        echo 'executing step2'
+    } else {
+        echo 'not executing step2'
+    }
+}
+}
+}
+        stage("stage3") {
+        steps {
+            script {
+if (env.step3 == 'true') {
+    echo 'executing step3'
+} else {
+    echo 'not executing step3'
+}
+}
+        }
+    }
+        }
+}
